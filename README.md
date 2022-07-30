@@ -8,3 +8,9 @@ This was a data science school project (LING 460). I presented this PowerPoint i
 Terror Project
 
 Statistical analysis & visualization of terrorist attack data from the year 2001 onward. Data was scraped from TROP.
+
+To be posted once I can get back to Chapel Hill to access my school laptop:
+
+Credit Card Eligibility Detection
+
+Movie Reviews Sentiment Analysis
