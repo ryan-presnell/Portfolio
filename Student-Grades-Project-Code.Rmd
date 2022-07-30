@@ -1,0 +1,170 @@
+```{r}
+library(readr)
+library(tidyverse)
+data = read_csv("student-mat.csv")
+library(showtext)
+font_add_google("Open Sans", "Open Sans")
+showtext_auto()
+
+```
+
+```{r}
+plot1 = ggplot(data)+
+  geom_bar(aes(x=Mjob,fill=Fjob))+
+  xlab("Mother's Job")+
+  ggtitle("Students' Parental Occupations")+
+  ylab("Frequency")+
+  #theme_dark()+c("#049292","#34a37d","#73af5c","#b6b33d","#ffac40")
+  scale_fill_manual(values=c("#ffac40","#b6b33d","#73af5c","#34a37d","#049292"),name="Father's Job")+
+  theme(panel.grid = element_line(color="gray"))+
+  scale_x_discrete(labels = c("At home", "Health", "Other","Services","Teacher"))+
+  theme(rect = element_rect(fill="transparent"),panel.background = element_rect(fill="transparent"),panel.grid = element_line(color = "gray"),text = element_text(size=64,family="Open Sans"),axis.text.x = element_text(angle = 30))
+plot1
+ggsave("460chart5.png")
+
+plot2 = ggplot(data)+
+  geom_point(aes(x=absences,y=G3,color=romantic),size=4)+
+    xlab("Absences")+
+    ggtitle("Final Grades, Absences and Romance")+
+    ylab("Final Exam Grade")+
+    scale_color_manual(values=c("#ffac40","#049292"),name="Romantic?")+
+  theme(rect = element_rect(fill="transparent"),panel.background = element_rect(fill="transparent"),panel.grid = element_line(color = "gray"),text = element_text(size=64,family="Open Sans"))
+plot2
+ggsave("460chart1.png")
+
+```
+```{r}
+data$grade_range = cut(data$G3,c(0,3,8,12,16,20),labels=c("Zero","Bad","Average","Good","Great"),include.lowest=T)
+ggplot(data)+
+  geom_bar(aes(G3,fill=grade_range))+
+  xlab("Final Grade")+
+  ylab("Frequency")+
+  ggtitle("Student Grades by Grade Range")+
+  scale_fill_manual(values=c("#049292","#34a37d","#73af5c","#b6b33d","#ffac40"),name="Grade Range")+
+  #theme_dark()+
+  theme(rect = element_rect(fill="transparent"),panel.background = element_rect(fill="transparent"),panel.grid = element_line(color = "gray"),text = element_text(size=64,family="Open Sans"))
+ggsave("460chart3.png")
+```
+
+```{r}
+set.seed(460)
+train = sample(1:395,300)
+test = data[-train,]
+train = data[train,]
+```
+With grades
+```{r}
+set.seed(460)
+mod1 = summary(leaps::regsubsets(G3~.,data=train[-34],intercept=F))
+data.frame(RSQ = mod1$rsq, CP = mod1$cp,BIC = mod1$bic)
+mod1$which[c(4,5),]
+
+mod1 = lm(G3~0+age+absences+G1+G2,data=train)
+summary(mod1)
+mod2 = lm(G3~0+age+famrel+absences+G1+G2,data=train)
+summary(mod2)
+
+mod1.gr = cut(mod1$fitted.values,c(-10000,3,8,12,16,10000),labels=c("Zero","Bad","Average","Good","Great"),include.lowest=T)
+mean(mod1.gr==train$grade_range)
+
+mod1.yhat = predict(mod1,test[-34])
+mod2.yhat = predict(mod2,test[-34])
+
+mod1.MSPE = mean((test$G3-mod1.yhat)^2)
+mod2.MSPE = mean((test$G3-mod2.yhat)^2)
+mod1.MSPE
+mod2.MSPE
+```
+
+```{r}
+mod1.gr = cut(mod1.yhat,c(-10000,3,8,12,16,10000),labels=c("Zero","Bad","Average","Good","Great"),include.lowest=T)
+mod2.gr = cut(mod2.yhat,c(-10000,3,8,12,16,10000),labels=c("Zero","Bad","Average","Good","Great"),include.lowest=T)
+plot4.df = data.frame(Predicted = c(mod1.gr,mod2.gr), 
+                          True = c(test$grade_range, test$grade_range),
+                          Accurate = c(mod1.gr == test$grade_range,mod2.gr==test$grade_range),
+                          Model = c(rep("4 Predictors",95),rep("5 Predictors",95)))
+plot4 = ggplot(plot4.df)+
+  geom_bar(aes(Predicted,fill=Accurate))+
+  scale_fill_manual(values=c("#ffac40","#049292"),name="Accurate?")+
+  ylab("Frequency")+
+    facet_wrap(~Model)+
+  ggtitle("Accuracy of Predicted Grade Ranges")+
+  theme(rect = element_rect(fill="transparent"),panel.background = element_rect(fill="transparent"),panel.grid = element_line(color = "gray"), text = element_text(size = 64, family = "Open Sans"),axis.text.x = element_text(angle = 35),strip.background = element_rect(fill="#47c0c0"))
+plot4
+
+
+
+ggsave("460chart4.png")
+
+mean(mod1.gr==test$grade_range)
+mean(mod2.gr==test$grade_range)
+```
+```{r}
+ggplot(data)+
+  geom_density(aes(x=G3,fill=address),alpha=0.6,color="transparent")+
+   scale_fill_manual(values=c("#ffac40","#049292"),name="Address",labels=c("Rural","Urban"))+
+  ylab("")+
+  ggtitle("Final Grade Distributions")+
+  xlab("Final Grades")+
+  theme(rect = element_rect(fill="transparent"),panel.background = element_rect(fill="transparent"),panel.grid = element_line(color = "transparent"), text = element_text(size = 96, family = "Open Sans"),strip.background = element_rect(fill="#47c0c0"),axis.ticks.y = element_blank(), axis.text.y = element_blank(), legend.position = "top")
+
+ggsave("460chart2.png")
+library(gganimate)
+frame = data %>% group_by(famrel) %>% summarise(`1` = mean(G1), `2` = mean(G2), `3` = mean(G3)) %>% pivot_longer(c(`1`,`2`,`3`))
+frame = frame %>% arrange(as.integer(name))
+frame$name = as.integer(frame$name)
+chart3 = ggplot(frame,aes(as.numeric(name),value,group=famrel,color=factor(famrel)))+
+  geom_line(size=2)+
+  xlab("Exam Number")+
+  geom_point(aes(group = seq_along(famrel)),size=5)+
+  geom_segment(aes(xend=3.1,yend=value,group=famrel),linetype=2)+
+  geom_text(aes(x = 3.1,label = paste("Quality",factor(famrel)),hjust=0))+
+  ylab("Mean Exam Score\n\n")+
+  ggtitle("Exam Scores by Quality of Family Relationships")+
+  labs(caption=str_wrap("Quality is on a scale of 1 to 5 where 1 represents `very bad` and 5 represents `excellent`"),20)+
+  scale_color_manual(values=c("#049292","#34a37d","#73af5c","#b6b33d","#ffac40"),name="Quality      ")+
+  theme(rect = element_rect(fill="#e7f3f3"),panel.background = element_rect(fill="transparent"),panel.grid = element_line(color = "gray"),text = element_text(family="Open Sans"),plot.caption = element_text(hjust=0.5))+
+  scale_x_continuous(breaks=c(1,2,3),labels=c("1","2","3"),limits=c(1,3.5))+
+ transition_reveal(as.integer(name))
+chart3
+anim_save("460chart7.gif",chart3,end_pause = 50,fps=30)
+```
+
+
+```{r}
+library(class)
+set.seed(460)
+knn = class::knn(train[which(colnames(train) %in% c("age","G1","G2","famrel"))],test[which(colnames(train) %in% c("age","G1","G2","famrel"))],unlist(train[,34]),k=5)
+mean(data.frame(knn) == test[34])
+df = table(Predicted = knn,Actual = test$grade_range)
+
+```
+
+Hypothesis testing
+```{r}
+shapiro.test(data$G3[data$romantic=="yes"])
+shapiro.test(data$G3[data$romantic=="no"])
+wilcox.test(data$G3[data$romantic=="yes"],data$G3[data$romantic=="no"])
+shapiro.test(data$G3[data$absences>=20])
+shapiro.test(data$G3[data$absences<20])
+wilcox.test(data$G3[data$absences<20],data$G3[data$absences>=20])
+```
+
+
+```{r,render=lemon_print}
+df = data.frame(table(Predicted = knn,Actual = test$grade_range))
+df$Accuracy = ifelse(df$Predicted == df$Actual,"True","False")
+df$Accuracy = ifelse(df$Freq==0,"N/A",df$Accuracy)
+df$Accuracy = factor(df$Accuracy,levels = c("True","False","N/A"))
+ggplot(df,aes(Predicted,Actual,fill=Accuracy))+
+  geom_tile(alpha=.8)+
+  scale_fill_manual(values=c("#ffac40","#fff2cc","#049292"),name="Accurate?")+
+  geom_text(aes(label=round(Freq,3)),size=16)+
+  labs(caption="")+
+  theme(rect = element_rect(fill="transparent"),panel.background = element_rect(fill="transparent"),panel.grid = element_line(color = "transparent"),text = element_text(size=64,family="Open Sans"),axis.text.x = element_text(angle=30,vjust = .75), legend.title = element_text(vjust=0),plot.caption = element_text(hjust = .5,lineheight = 0.3))+
+  ggtitle("Grade Range Prediction Accuracy")
+ggsave("460chart6.png")
+```
+
+
+
