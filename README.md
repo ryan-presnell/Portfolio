@@ -9,8 +9,11 @@ Terror Project
 
 Statistical analysis & visualization of terrorist attack data from the year 2001 onward. Data was scraped from TROP.
 
+Movie Reviews Sentiment Analysis
+
+One positive & negative review for each of the top 250 rated imdb movies were scraped. I then utilized two modeling methods - the bag of words & bigram methods - in order to predict whether the reviews in the test data were positive or negative reviews. 
+
 To be posted once I can get back to Chapel Hill to access my school laptop:
 
 Credit Card Eligibility Detection
 
-Movie Reviews Sentiment Analysis
