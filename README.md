@@ -7,7 +7,7 @@ Some of my data science projects:
 
 [PPT Slides](Student-Grades-Project-Slides.pptx)
 
-This was a data science school project (LING 460 - Textual Data in R). I presented this PowerPoint in front of my peers. Sadly I no longer have access to the data, so I will have to keep the file as an Rmd instead of knitting it to an html. In this project, students' grade ranges were predicted using multiple classification methods. Other statistical analyses such as Student's t-tests, Wilcoxon tests, and ANOVA tests were also performed.
+This was a data science school project (LING 460 - Textual Data in R). I presented this PowerPoint in front of my peers. In this project, students' grade ranges were predicted using multiple classification methods. Other statistical analyses such as Student's t-tests, Wilcoxon tests, and ANOVA tests were also performed.
 
 ## Terror Project
 [Code](Terror-Project-Code.html)
