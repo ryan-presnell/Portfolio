@@ -11,6 +11,7 @@ This was a data science school project (LING 460). I presented this PowerPoint i
 
 ## Terror Project
 [Code](Terror-Project-Code.html)
+
 [Dashboard](Terror-Project-Dashboard.png)
 
 Statistical analysis & visualization of terrorist attack data from the year 2001 onward. Data was scraped from TROP.
