@@ -24,4 +24,4 @@ I first scraped one positive & negative review for each of the top 250 rated imd
 
 ## Credit Card Eligibility Detection
 
-Code & PPT slides to be posted once I can get a working charger for my old laptop
+[PPT Slides](Credit-Card-Eligibility-PPT.pptx)
