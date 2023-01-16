@@ -3,9 +3,9 @@ Some of my data science projects:
 
 ## College Basketball Analysis
 
-[Paper](College-Basketball-Analysis.docx)
+[Paper](College Basketball Analysis.docx)
 
-[Code](College-Basketball-Analysis-Code.html)
+[Code](College Basketball Analysis Code.html)
 
 Using data on college basketball teams such as offensive/defensive efficiency and power rating, I attempted to make predictions including picking a bracket for the 2019 NCAA MBB tournament. Included is the 5-page paper with analysis and the code file. 
 
