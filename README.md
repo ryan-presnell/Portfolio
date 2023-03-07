@@ -12,13 +12,13 @@ This portfolio contains some of my data analytics projects.
 
 In this project, I explore the efficacy of (and make changes to) the stochastic model baseball proposed by numerous authors modeling of an inning with the goal of producing an effective means of testing one batting lineup over another.
 
-### College Basketball Analysis
+### Testing the Limits of College Basketball Playoff Predictions
 
 [Paper](College-Basketball-Analysis.docx)
 
 [Code](College-Basketball-Analysis-Code.html)
 
-Using data on college basketball teams such as offensive/defensive efficiency and power rating, I attempted to make predictions including picking a re-prediction of the 2019 NCAA MBB tournament. Included is the 5-page paper with analysis & code file. 
+Using data on college basketball teams such as offensive/defensive efficiency and power rating, I used machine learning algorithms such as KNN and Random Forest to make predictions including a re-prediction of the 2019 NCAA MBB tournament. Included is the 5-page paper with analysis & code file. 
 
 ## Misc.
 
