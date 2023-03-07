@@ -1,7 +1,7 @@
 # Portfolio
 Some of my data science projects:
 
-##Sports
+## Sports
 
 ![Lebron vs. Jordan](lebronvsjordan.png)
 
