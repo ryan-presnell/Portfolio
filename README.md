@@ -1,5 +1,5 @@
-# Portfolio
-Some of my data science projects:
+# Ryan Presnell's Data Analytics Portfolio
+This portfolio contains some of my data analytics projects.
 
 ## Sports
 
@@ -15,12 +15,13 @@ Using data on college basketball teams such as offensive/defensive efficiency an
 
 ## Misc.
 
-### Terror Project
-[Code](Terror-Project-Code.html)
+![Map](map.png)
 
-[Dashboard](Terror-Project-Dashboard.png)
+### Credit Card Eligibility 
 
-This is primarily a cleaning & visualization (in Tableau and ggplot2) project. Data describes terrorist attacks from the year 2001 onward & was scraped from TROP.
+[PowerPoint](Credit-Card-Eligibility-PPT.pptx)
+
+As of yet, this project is mostly a visualization project utilizing Tableau and the ggplot2 package in R; however, I did fit a couple of machine learning models but have had to switch gears and do not have much time to continue this project.
 
 ### Movie Reviews Sentiment Analysis
 
