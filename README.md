@@ -5,6 +5,13 @@ This portfolio contains some of my data analytics projects.
 
 ![Lebron vs. Jordan](lebronvsjordan.png)
 
+### Stochastic Simulation of MLB Run Distributions for Batting Lineup Optimization
+
+[Paper]()
+[Code]()
+
+In this project, I explore the efficacy of (and make changes to) the stochastic model baseball proposed by numerous authors modeling of an inning with the goal of producing an effective means of testing one batting lineup over another.
+
 ### College Basketball Analysis
 
 [Paper](College-Basketball-Analysis.docx)
