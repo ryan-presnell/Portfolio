@@ -7,7 +7,7 @@ This portfolio contains some of my data analytics projects.
 
 ### Stochastic Simulation of MLB Run Distributions for Batting Lineup Optimization
 
-[Paper]()
+[Paper](MLBPaper.docx)
 
 [Code]()
 
