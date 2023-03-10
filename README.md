@@ -9,7 +9,7 @@ This portfolio contains some of my data analytics projects.
 
 [Paper](MLBPaper.docx)
 
-[Code]()
+[Code](mlbproject.html)
 
 In this project, I explore the efficacy of (and make changes to) the stochastic model baseball proposed by numerous authors modeling of an inning with the goal of producing an effective means of testing one batting lineup over another.
 
