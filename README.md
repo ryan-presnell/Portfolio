@@ -3,15 +3,13 @@ This portfolio contains some of my data analytics projects.
 
 ## Sports
 
-![Lebron vs. Jordan](lebronvsjordan.png)
-
 ### Stochastic Simulation of MLB Run Distributions for Batting Lineup Optimization
 
 [Paper](MLBPaper.docx)
 
 [Code](mlbproject.html)
 
-In this project, I explore the efficacy of (and make changes to) the stochastic model baseball proposed by numerous authors modeling of an inning with the goal of producing an effective means of testing one batting lineup over another.
+In this project, I explore the efficacy of (and make changes to) the stochastic model of an inning of baseball independently proposed by numerous authors with the goal of producing an effective means of testing one batting lineup over another.
 
 ### Testing the Limits of College Basketball Playoff Predictions
 
@@ -21,9 +19,9 @@ In this project, I explore the efficacy of (and make changes to) the stochastic 
 
 Using data on college basketball teams such as offensive/defensive efficiency and power rating, I used machine learning algorithms such as KNN and Random Forest to make predictions including a re-prediction of the 2019 NCAA MBB tournament. Included is the 5-page paper with analysis & code file. 
 
-## Misc.
+![Lebron vs. Jordan](lebronvsjordan.png)
 
-![Map](map.png)
+## Misc.
 
 ### Credit Card Eligibility 
 
@@ -36,3 +34,5 @@ As of yet, this project is mostly a visualization project utilizing Tableau and 
 [Code & Discussion](reviews-sentiment-analysis.html)
 
 I first scraped one positive & negative review for each of the top 250 rated imdb movies. I then utilized two modeling methods - the bag of words method & bigram method - in order to predict whether the reviews in the test data were positive or negative reviews. 
+
+![Map](map.png)
